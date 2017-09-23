@@ -1,3 +1,4 @@
 
 IMPROVEMENTS
-- Possibility to add new versions without impacting the existing services.
+- Possibility to add new versions without impacting the existing services. (just extending the existing Vx classes)
+- Accept binary data directly from a upload form?

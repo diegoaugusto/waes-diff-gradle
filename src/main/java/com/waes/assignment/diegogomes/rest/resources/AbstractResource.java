@@ -9,8 +9,13 @@ import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 public abstract class AbstractResource {
 
+	protected Log log = LogFactory.getLog(getClass().getName());
+	
 	@Context
 	protected ServletContext servletContext;
 	
