@@ -18,7 +18,7 @@ public class BadRequestException extends JsonException {
 	 * @param errorMessage Message used to describe the error that happened while processing the request
 	 */
 	public BadRequestException(String errorMessage) {
-		super(Response.Status.BAD_REQUEST, errorMessage);
+		super(Response.Status.BAD_REQUEST.getStatusCode(), errorMessage);
 	}
 	
 	/**
@@ -27,6 +27,6 @@ public class BadRequestException extends JsonException {
 	 * @param t {@link Throwable} object
 	 */
 	public BadRequestException(String errorMessage, Throwable t) {
-		super(Response.Status.BAD_REQUEST, errorMessage, t);
+		super(Response.Status.BAD_REQUEST.getStatusCode(), errorMessage, t);
 	}
 }

@@ -12,6 +12,12 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * Abstract class containing some useful methods that can be used by the children classes that implement
+ * new resources.
+ * @author Diego Gomes
+ *
+ */
 public abstract class AbstractResource {
 
 	protected Log log = LogFactory.getLog(getClass().getName());

@@ -18,7 +18,7 @@ public class InternalServerException extends JsonException {
 	 * @param errorMessage Message used to describe the error that happened while processing the request
 	 */
 	public InternalServerException(String errorMessage) {
-		super(Response.Status.INTERNAL_SERVER_ERROR, errorMessage);
+		super(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), errorMessage);
 	}
 	
 	/**
@@ -27,6 +27,6 @@ public class InternalServerException extends JsonException {
 	 * @param t {@link Throwable} object
 	 */
 	public InternalServerException(String errorMessage, Throwable t) {
-		super(Response.Status.INTERNAL_SERVER_ERROR, errorMessage, t);
+		super(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), errorMessage, t);
 	}
 }

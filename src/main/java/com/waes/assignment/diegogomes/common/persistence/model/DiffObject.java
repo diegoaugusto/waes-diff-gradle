@@ -3,6 +3,8 @@ package com.waes.assignment.diegogomes.common.persistence.model;
 import org.bson.Document;
 import org.bson.types.Binary;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class DiffObject {
 
 	private Integer id;
@@ -55,6 +57,7 @@ public class DiffObject {
 	/**
 	 * Returns a MongoDB Document instance based on the content of the DiffObject
 	 */
+	@JsonIgnore
 	public Document getMongoDBDocument() {
 		Document doc = new Document(DiffObjectFieldsEnum.ID.getDescription(), this.getId())
 				.append(DiffObjectFieldsEnum.LEFT.getDescription(), this.getLeft())

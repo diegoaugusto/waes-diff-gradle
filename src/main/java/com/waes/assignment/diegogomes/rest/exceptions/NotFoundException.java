@@ -18,7 +18,7 @@ public class NotFoundException extends JsonException {
 	 * @param errorMessage Message used to describe the error that happened while processing the request
 	 */
 	public NotFoundException(String errorMessage) {
-		super(Response.Status.NOT_FOUND, errorMessage);
+		super(Response.Status.NOT_FOUND.getStatusCode(), errorMessage);
 	}
 	
 	/**
@@ -27,6 +27,6 @@ public class NotFoundException extends JsonException {
 	 * @param t {@link Throwable} object
 	 */
 	public NotFoundException(String errorMessage, Throwable t) {
-		super(Response.Status.NOT_FOUND, errorMessage, t);
+		super(Response.Status.NOT_FOUND.getStatusCode(), errorMessage, t);
 	}
 }

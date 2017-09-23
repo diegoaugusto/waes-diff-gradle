@@ -18,7 +18,7 @@ public class Base64Exception extends JsonException {
 	 * Constructor
 	 */
 	public Base64Exception() {
-		super(Response.Status.BAD_REQUEST, BASE64_EXCEPTION_MESSAGE);
+		super(Response.Status.BAD_REQUEST.getStatusCode(), BASE64_EXCEPTION_MESSAGE);
 	}
 	
 	/**
@@ -26,6 +26,6 @@ public class Base64Exception extends JsonException {
 	 * @param t {@link Throwable} object
 	 */
 	public Base64Exception(Throwable t) {
-		super(Response.Status.BAD_REQUEST, BASE64_EXCEPTION_MESSAGE, t);
+		super(Response.Status.BAD_REQUEST.getStatusCode(), BASE64_EXCEPTION_MESSAGE, t);
 	}
 }
