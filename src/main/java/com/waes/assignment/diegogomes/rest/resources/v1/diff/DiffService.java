@@ -3,13 +3,13 @@ package com.waes.assignment.diegogomes.rest.resources.v1.diff;
 import java.util.Arrays;
 import java.util.Base64;
 
-import org.bson.Document;
-
 import com.waes.assignment.diegogomes.common.persistence.DBService;
 import com.waes.assignment.diegogomes.common.persistence.DBServiceFactoryCreator;
 import com.waes.assignment.diegogomes.common.persistence.model.DiffObject;
 import com.waes.assignment.diegogomes.common.persistence.model.DiffObjectFieldsEnum;
 import com.waes.assignment.diegogomes.common.persistence.mongodb.MongoDBServiceCreator;
+import com.waes.assignment.diegogomes.rest.exceptions.Base64Exception;
+import com.waes.assignment.diegogomes.rest.exceptions.InternalServerException;
 
 /**
  * This is the service class where all the business logic related to the diff operation
@@ -47,24 +47,34 @@ public class DiffService {
 		return this.getDb().getDiffObjectById(id);
 	}
 	
-	public void insert(Integer id, String side, String base64Data) {
-		byte[] decodedData = Base64.getDecoder().decode(base64Data);
+	public void insert(Integer id, String side, String base64Data) throws Base64Exception, InternalServerException {
+		byte[] decodedData = null;
 		
-		DiffObject diffObject = this.getById(id);
-		if (diffObject == null) {
-			diffObject = new DiffObject();
-			diffObject.setId(id);
+		try {
+			decodedData = Base64.getDecoder().decode(base64Data);
+		} catch (Exception e) {
+			throw new Base64Exception(e);
 		}
 		
-		DiffObjectFieldsEnum diffSide = DiffObjectFieldsEnum.getByDescription(side);
-		
-		if (diffSide.equals(DiffObjectFieldsEnum.LEFT)) {
-			diffObject.setLeft(decodedData);
-		} else if (diffSide.equals(DiffObjectFieldsEnum.RIGHT)) {
-			diffObject.setRight(decodedData);
+		try {
+			DiffObject diffObject = this.getById(id);
+			if (diffObject == null) {
+				diffObject = new DiffObject();
+				diffObject.setId(id);
+			}
+			
+			DiffObjectFieldsEnum diffSide = DiffObjectFieldsEnum.getByDescription(side);
+			
+			if (diffSide.equals(DiffObjectFieldsEnum.LEFT)) {
+				diffObject.setLeft(decodedData);
+			} else if (diffSide.equals(DiffObjectFieldsEnum.RIGHT)) {
+				diffObject.setRight(decodedData);
+			}
+			
+			this.getDb().insertOrUpdate(diffObject);
+		} catch (Exception e) {
+			throw new InternalServerException("Error while inserting the binary data.", e);
 		}
-		
-		this.getDb().insertOrUpdate(diffObject);
 	}
 	
 	public void getDiff(Integer id) {

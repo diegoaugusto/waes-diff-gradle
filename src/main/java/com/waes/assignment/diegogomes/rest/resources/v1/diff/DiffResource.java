@@ -67,16 +67,21 @@ public class DiffResource extends AbstractResource {
 	}
 	
 	/**
+	 * End-point that will store the data stream for one specific {id} and one specific {side} of the diff comparison.
+	 * It implements requirement "Provide 2 http endpoints that accepts JSON base64 encoded binary data on both endpoints"
 	 * 
-	 * @param id
-	 * @param side
-	 * @param base64Data
+	 * Examples of calls:
+	 * - <host>/v1/diff/234/right
+	 * - <host>/v1/diff/234/left
+	 * 
+	 * @param id The id of the Diff object created to compare both binary data. Only {@link Integer} value is expected
+	 * @param side The side of the Diff comparison. Possible values are "right" and "left".
+	 * @param base64Data Binary data encoded in Base64
 	 * @return
 	 */
-	// <host>/v1/diff/<ID>/right
 	@POST
 	@Path("{id}/{side}")
-	@Consumes("application/x-www-form-urlencoded")
+	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response postRight(@PathParam("id") final Integer id, @PathParam("side") final String side, @FormParam("data") String base64Data) {
 		if (id == null) {
@@ -95,53 +100,10 @@ public class DiffResource extends AbstractResource {
 	}
 	
 	
+	
+	
+	// GETTERS and SETTERS
 	private DiffService getDiffService() {
 		return this.diffService;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	// TODO FIXME Remove
-	@GET
-	@Path("hello")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String sayHello() {
-		return "Hello 1!!";
-	}
-	
-	public static void main(String[] args) {
-		String str = new String("testando base 64");
-		System.out.println(Base64.getEncoder().encodeToString(str.getBytes()));
-		
-		
-		MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
-		// Creating Credentials 
-		MongoCredential credential;
-		credential = MongoCredential.createCredential("waes", "waesDb", "waespassword".toCharArray());
-		System.out.println("Connected to the database successfully");
-		
-		MongoDatabase database = mongoClient.getDatabase("waesDb");
-
-		// Retrieving a collection
-		MongoCollection<Document> collection = database.getCollection("sampleCollection");
-		System.out.println("Collection sampleCollection selected successfully");
-		
-		// Getting the iterable object
-		FindIterable<Document> iterDoc = collection.find();
-		int i = 1;
-
-		// Getting the iterator
-		Iterator it = iterDoc.iterator();
-
-		while (it.hasNext()) {
-			System.out.println(it.next());
-			i++;
-		}
 	}
 }
