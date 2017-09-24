@@ -31,7 +31,7 @@ As soon as all these tools are installed, follow the steps
 - Open Eclipse
 - Open the Eclipse Marketplace, search for _Gradle_ and install the _Buildship Gradle Integration 2.0_
 - Import the `waes-diff-gradle` project that was cloned in a folder of your choice
-- Right-click the project and select Gradle -> Refresh Gradle Project
+- Right-click the project and select Gradle -\> Refresh Gradle Project
 - Go to the Gradle Tasks tab and Run a build (it will download the dependencies, build and run all the unit tests). If you are in a command line environment, run `./gradlew build` from the project folder.
 - Create a new server on Eclipse and set its type to be a WildFly 10.x. Add the `waes-diff-gradle` project to this server
 - Start MongoDB in the command line `mongod`
@@ -42,14 +42,14 @@ Assuming the application is running on your host `localhost:8080`, the REST serv
 Here are the available services:
 
 Method | Path | Details
------ | ----- | ----- | ----- | -----
-GET | _<host>_/waes-diff-gradle/v1/diff/*<ID>* | *<ID>* MUST be positive Integer value
-POST | _<host>_/waes-diff-gradle/v1/diff/*<ID>*/*<SIDE>* | *<ID>* MUST be positive Integer value. *<SIDE>* has two possible values: **left** or **right**
+----- | ----- | ----- 
+GET | _\<host\>_/waes-diff-gradle/v1/diff/*\<ID\>* | *\<ID\>* MUST be positive Integer value
+POST | _\<host\>_/waes-diff-gradle/v1/diff/*\<ID\>*/*\<SIDE\>* | *\<ID\>* MUST be positive Integer value. *\<SIDE\>* has two possible values: **left** or **right**
 
 ### Detailed view of the services
 Here you can see details about each service.
 
-#### GET _<host>_/waes-diff-gradle/v1/diff/*<ID>*
+#### GET _\<host\>_/waes-diff-gradle/v1/diff/*\<ID\>*
 
 - **200** When request is successful
 ```javascript
@@ -64,7 +64,7 @@ Here you can see details about each service.
 }
 ```
 
-- **404** Not Found, when there isn't a corresponding *<ID>* in the database or the *<ID>* is invalid
+- **404** Not Found, when there isn't a corresponding *\<ID\>* in the database or the *\<ID\>* is invalid
 ```javascript
 {
   "status": 404,
@@ -73,11 +73,11 @@ Here you can see details about each service.
 }
 ```
 
-- **405** Method is not allowed, when *<ID>* is empty
+- **405** Method is not allowed, when *\<ID\>* is empty
 - **500** Internal server error has happened
 
 
-#### POST _<host>_/waes-diff-gradle/v1/diff/*<ID>*/*<SIDE>*
+#### POST _\<host\>_/waes-diff-gradle/v1/diff/*\<ID\>*/*\<SIDE\>*
 
 
 
