@@ -42,7 +42,7 @@ Assuming the application is running on your host `localhost:8080`, the REST serv
 Here are the available services:
 
 Method | Path | Possible Status Codes | Successful Response example | Details
-_____ | _____ | _____ | _____ | _____
+----- | ----- | ----- | ----- | -----
 GET | _<host>_/waes-diff-gradle/v1/diff/_<ID>_ | 200, 400, 404, 500 | ```javascript {"status": 200,"message": "Request successfully processed.","diff":{"id": 1,"equal": false,"sameSize": true,"offsets":[{"offset": 0,"length": 3}]}} ``` | _<ID>_ MUST be positive Integer value
 POST | _<host>_/waes-diff-gradle/v1/diff/_<ID>_/_<SIDE>_ | 200, 400, 404, 500 | ```javascript {"status": 200,"message": "Request successfully processed.","diffObject":{"id": 1,"left": "YWJjZGVmZ2hpag==","right": "MDEyZGVmZ2hpag=="}} ``` | _<ID>_ MUST be positive Integer value. _<SIDE>_ has two possible values: **left** or **right**
 
