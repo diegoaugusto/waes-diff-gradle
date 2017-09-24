@@ -126,9 +126,8 @@ public class DiffResource extends AbstractResource {
 	public Response postBinaryData(@PathParam("id") final String id, @PathParam("side") final String side, InputStream body) {
 		// validate input of <id> parameter
 		log.info("Validating id ["+ id +"]");
-		Integer idInt = null;
 		try {
-			idInt = this.getDiffService().validateId(id);
+			Integer idInt = this.getDiffService().validateId(id);
 			
 			// validate input of <side> parameter
 			log.info("Validating parameter <side> ["+ side +"]");

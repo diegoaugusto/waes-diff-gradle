@@ -1,5 +1,7 @@
 package com.waes.assignment.diegogomes.rest.exceptions;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Exception for a response in the following formats:
  * 		{"code":<error code>, "error":"<error message>"}
@@ -38,6 +40,35 @@ public class JsonException extends Exception {
 		this.exception = (t == null) ? null : t.getMessage();
 	}
 
+	@Override
+	@JsonIgnore
+	public StackTraceElement[] getStackTrace() {
+		return super.getStackTrace();
+	}
+	
+	@Override
+	@JsonIgnore
+	public String getMessage() {
+		return super.getMessage();
+	}
+	
+	@Override
+	@JsonIgnore
+	public String getLocalizedMessage() {
+		return super.getLocalizedMessage();
+	}
+	
+	@Override
+	@JsonIgnore
+	public synchronized Throwable getCause() {
+		return super.getCause();
+	}
+	
+	@JsonIgnore
+	public void getSupressed() {
+	}
+	
+	
 	
 	// #### GETTERS and SETTERS
 	public Integer getStatus() {
