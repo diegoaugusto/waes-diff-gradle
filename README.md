@@ -120,6 +120,11 @@ Here you can see details about each service.
 
 - **500** Internal server error has happened
 
+### Suggestion of use
+- Call POST _\<host\>_/waes-diff-gradle/v1/diff/1/left passing {"data":"YWJjZGVmZ2hpag=="} as the body of the request.
+- Call POST _\<host\>_/waes-diff-gradle/v1/diff/1/right passing {"data":"MDEyZGVmZ2hpag=="} as the body of the request.
+- Call GET _\<host\>_/waes-diff-gradle/v1/diff/1 and check its response
+
 
 ## How the code is organized
 
