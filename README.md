@@ -53,18 +53,10 @@ Here you can see details about each service.
 
 | Status Codes | Example of Responses |
 | :---------: | -------------------- |
-| 200 | <pre lang="javascript">{
-"status": 200,
-"message": "Request successfully processed.",
-"diffObject":{
-"id": 1,
-"left": "YWJjZGVmZ2hpag==",
-"right": "MDEyZGVmZ2hpag=="
-}
-}</pre> |
-| 400 |  
-| 404 |  
-| 500 | 
+| 200 | <pre lang="javascript">{"status": 200,"message": "Request successfully processed.","diffObject":{"id": 1,"left": "YWJjZGVmZ2hpag==","right": "MDEyZGVmZ2hpag=="}}</pre> |
+| 400 |  |
+| 404 |  |
+| 500 |  |
 
 ## How the code is organized
 
