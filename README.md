@@ -53,17 +53,15 @@ Here you can see details about each service.
 
 | Status Codes | Example of Responses |
 | :---------: | -------------------- |
-| 200 | `json { "status": 200,` |
-|     | `                "message": "Request successfully processed.",` |
-|	  | `				    "diff": { "id": 1, ` |
-| 	  | ` 							  "equal": false, ` |
-| 	  | ` 							  "sameSize": true, ` |
-|     | `  						  "offsets":[ ` |
-| 	  | `										 {"offset": 0,"length": 3} ` |
-| 	  | `										 {"offset": 5,"length": 2} ` |
-|	  | `							   ] ` |
-|     | ` 							} ` |
-| 	  | `                } ` |
+| 200 | <pre lang="javascript">{
+"status": 200,
+"message": "Request successfully processed.",
+"diffObject":{
+"id": 1,
+"left": "YWJjZGVmZ2hpag==",
+"right": "MDEyZGVmZ2hpag=="
+}
+}</pre> |
 | 400 |  
 | 404 |  
 | 500 | 
