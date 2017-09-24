@@ -43,13 +43,13 @@ Here are the available services:
 
 Method | Path | Details
 ----- | ----- | ----- | ----- | -----
-GET | _<host>_/waes-diff-gradle/v1/diff/_<ID>_ | _<ID>_ MUST be positive Integer value
-POST | _<host>_/waes-diff-gradle/v1/diff/_<ID>_/_<SIDE>_ |  ```javascript {"status": 200,"message": "Request successfully processed.","diffObject":{"id": 1,"left": "YWJjZGVmZ2hpag==","right": "MDEyZGVmZ2hpag=="}} ``` | _<ID>_ MUST be positive Integer value. _<SIDE>_ has two possible values: **left** or **right**
+GET | _<host>_/waes-diff-gradle/v1/diff/*<ID>* | *<ID>* MUST be positive Integer value
+POST | _<host>_/waes-diff-gradle/v1/diff/*<ID>*/*<SIDE>* | *<ID>* MUST be positive Integer value. *<SIDE>* has two possible values: **left** or **right**
 
 ### Detailed view of the services
 Here you can see details about each service.
 
-#### GET _<host>_/waes-diff-gradle/v1/diff/_<ID>_
+#### GET _<host>_/waes-diff-gradle/v1/diff/*<ID>*
 
 - **200** When request is successful
 ```javascript
@@ -64,7 +64,7 @@ Here you can see details about each service.
 }
 ```
 
-- **404** Not Found, when there isn't a corresponding _<ID>_ in the database or the _<ID>_ is invalid
+- **404** Not Found, when there isn't a corresponding *<ID>* in the database or the *<ID>* is invalid
 ```javascript
 {
   "status": 404,
@@ -73,7 +73,12 @@ Here you can see details about each service.
 }
 ```
 
-- **405** Method is not allowed, when _<ID>_ is empty
+- **405** Method is not allowed, when *<ID>* is empty
+- **500** Internal server error has happened
+
+
+#### POST _<host>_/waes-diff-gradle/v1/diff/*<ID>*/*<SIDE>*
+
 
 
 
