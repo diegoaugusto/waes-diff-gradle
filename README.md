@@ -69,7 +69,8 @@ Here you can see details about each service.
 {
   "status": 404,
   "error": "Id does not exist.",
-  "exception": null
+  "exception": null,
+  "suppressed":[]
 }
 ```
 
@@ -79,14 +80,52 @@ Here you can see details about each service.
 
 #### POST _\<host\>_/waes-diff-gradle/v1/diff/*\<ID\>*/*\<SIDE\>*
 
+- **Payload** body example
+```javascript
+{"data":"MDEyZGVmZ2hpag=="}
+```
 
+- **200** When request is successful
+```javascript
+{
+  "status": 200,
+  "message": "Request successfully processed.",
+  "diffObject":{
+  "id": 1,
+    "left": "YWJjZGVmZ2hpag==",
+    "right": "MDEyZGVmZ2hpag=="
+  }
+}
+```
+
+- **400** Bad Request. The payload data may not be a valid Base64 value.
+```javascript
+{
+  "status": 400,
+  "error": "This is not a valid Base64 encoded value.",
+  "exception": "Last unit does not have enough valid bits",
+  "suppressed":[]
+}
+```
+
+- **404** Not Found. Invalid or non-existing ID
+```javascript
+{
+  "status": 404,
+  "error": "ID MUST be a positive Integer value.",
+  "exception": null,
+  "suppressed":[]
+}
+```
+
+- **500** Internal server error has happened
 
 
 ## How the code is organized
 
 
-## Possible improvements
+## Possible improvements for future iterations.
 - Possibility to add new versions of the service API without impacting the existing version of the services.
-- Accept binary data directly from an upload form.
-- One unique POST service to submit both left and right binary data
--  
+- Accept binary data directly from an upload form. User could upload two files and compare them. Another possibility is to submit one audio file and compare left/right streams and identify if it is a mono (streams will be equal) or stereo audio file.
+- One unique POST service to submit both left and right binary data.
+- Provide User Interface to better test the services and manage the IDs.
