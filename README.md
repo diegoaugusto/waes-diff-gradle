@@ -33,6 +33,7 @@ As soon as all these tools are installed, follow the steps
 - Import the `waes-diff-gradle` project that was cloned in a folder of your choice
 - Right-click the project and select Gradle -\> Refresh Gradle Project
 - Go to the Gradle Tasks tab and Run a build (it will download the dependencies, build and run all the unit tests). If you are in a command line environment, run `./gradlew build` from the project folder.
+- You may need to right-click the project, again, and select Gradle -\> Refresh Gradle Project
 - Create a new server on Eclipse and set its type to be a WildFly 10.x. Add the `waes-diff-gradle` project to this server
 - Start MongoDB in the command line `mongod`
 - Start the WildFly server from Eclipse
@@ -126,7 +127,10 @@ Here you can see details about each service.
 - Call GET _\<host\>_/waes-diff-gradle/v1/diff/1 and check its response
 
 
-## How the code is organized
+## The code and its dependencies
+- REST services are implemented in Java following the JAX-RS API specification.
+- Unit tests are executed during the build process and are implemented with [JUnit](http://junit.org/).
+- 
 
 
 ## Possible improvements for future iterations.
@@ -134,3 +138,4 @@ Here you can see details about each service.
 - Accept binary data directly from an upload form. User could upload two files and compare them. Another possibility is to submit one audio file and compare left/right streams and identify if it is a mono (streams will be equal) or stereo audio file.
 - One unique POST service to submit both left and right binary data.
 - Provide User Interface to better test the services and manage the IDs.
+- Document API using the [OpenAPI (Swagger)](https://swagger.io/specification/) specification
