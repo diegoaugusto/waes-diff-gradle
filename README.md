@@ -51,12 +51,31 @@ Here you can see details about each service.
 
 #### GET _<host>_/waes-diff-gradle/v1/diff/_<ID>_
 
-| Status Codes | Example of Responses |
-| :---------: | -------------------- |
-| 200 | <pre lang="javascript">{"status": 200,"message": "Request successfully processed.","diffObject":{"id": 1,"left": "YWJjZGVmZ2hpag==","right": "MDEyZGVmZ2hpag=="}}</pre> |
-| 400 |  |
-| 404 |  |
-| 500 |  |
+- **200** When request is successful
+```javascript
+{
+  "status": 200,
+  "message": "Request successfully processed.",
+  "diffObject":{
+    "id": 1,
+    "left": "YWJjZGVmZ2hpag==",
+    "right": "MDEyZGVmZ2hpag=="
+  }
+}
+```
+
+- **404** Not Found, when there isn't a corresponding _<ID>_ in the database or the _<ID>_ is invalid
+```javascript
+{
+  "status": 404,
+  "error": "Id does not exist.",
+  "exception": null
+}
+```
+
+- **405** Method is not allowed, when _<ID>_ is empty
+
+
 
 ## How the code is organized
 
