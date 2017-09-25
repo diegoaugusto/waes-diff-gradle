@@ -11,11 +11,6 @@ apply plugin: 'war'
 apply plugin: 'eclipse-wtp'
 sourceCompatibility = 1.8
 
-//libraryVersions = [
-//   junit: '4.8.1', arquillian: '1.0.0.Alpha4', jbossJavaeeSpec: '1.0.0.Beta7', weld: '1.0.1-Final',
-//   slf4j: '1.5.8', log4j: '1.2.14', jbossas: '6.0.0.Final', glassfish: '3.0.1-b20', cdi: '1.0-SP1'
-//]
-
 buildscript {
     repositories {
         mavenCentral()
@@ -36,9 +31,9 @@ repositories {
     maven {
     		url "http://repo1.maven.org/maven2/org/junit/"
     }
-    maven {
-    		url 'http://repository.jboss.org/nexus/content/groups/public'
-    	}
+    //maven {
+    	//	url 'http://repository.jboss.org/nexus/content/groups/public'
+    	//}
     
 }
 
@@ -48,39 +43,30 @@ dependencies {
     compile 'org.mongodb:mongodb-driver:3.4.3'
     compile group: 'commons-logging', name: 'commons-logging', version: '1.1.3'
     compile group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-jaxrs-json-provider', version: '2.9.0'
+
     
-    // https://mvnrepository.com/artifact/org.jboss.arquillian.extension/arquillian-rest-warp-bom
-	//compile group: 'org.jboss.arquillian.extension', name: 'arquillian-rest-warp-bom', version: '1.0.0.Alpha4', ext: 'pom'
-	
+ 	providedCompile "javax.servlet:javax.servlet-api:3.1.0" 
+    
+//    compile 'com.github.jsimone:webapp-runner:8.5.11.3'
+    	
 	// main BOM for Arquillian
-	compile 'org.jboss.arquillian:arquillian-bom:1.1.11.Final'
+//	compile 'org.jboss.arquillian:arquillian-bom:1.1.11.Final'
 	// JUnit container
-	compile 'org.jboss.arquillian.junit:arquillian-junit-container:1.1.11.Final'
-	// Chameleon (or any other specific container, e.g. JBoss, Wildfly etc.)
-	//compile 'org.arquillian.container:arquillian-container-chameleon:1.0.0.Alpha6'
+//	compile 'org.jboss.arquillian.junit:arquillian-junit-container:1.1.11.Final'
 	
 	// REST extensions
-	compile 'org.jboss.arquillian.extension:arquillian-rest-client-impl-jersey:1.0.0.Alpha4' 
-	// https://mvnrepository.com/artifact/org.jboss.weld/weld-core
-	compile group: 'org.jboss.weld', name: 'weld-core', version: '2.4.5.Final'
-	// https://mvnrepository.com/artifact/org.jboss.arquillian.container/arquillian-container-spi
-	compile group: 'org.jboss.arquillian.container', name: 'arquillian-container-spi', version: '1.0.0.CR6'
-	
-	// https://mvnrepository.com/artifact/org.jboss.resteasy/resteasy-jaxrs
-	compile group: 'org.jboss.resteasy', name: 'resteasy-jaxrs', version: '2.3.0.GA'
-	
-	// https://mvnrepository.com/artifact/org.jboss.resteasy/resteasy-jaxb-provider
-	compile group: 'org.jboss.resteasy', name: 'resteasy-jaxb-provider', version: '2.3.3.Final'
+//	compile 'org.jboss.arquillian.extension:arquillian-rest-client-impl-jersey:1.0.0.Alpha4' 
+//	compile group: 'org.jboss.weld', name: 'weld-core', version: '2.4.5.Final'
+//	compile group: 'org.jboss.arquillian.container', name: 'arquillian-container-spi', version: '1.0.0.CR6'
 	
 	
+//	compile group: 'org.jboss.resteasy', name: 'resteasy-jaxrs', version: '2.3.0.GA'
+//	compile group: 'org.jboss.resteasy', name: 'resteasy-jaxb-provider', version: '2.3.0.Final'
 	
 	
+//	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
 	
-	// https://mvnrepository.com/artifact/org.slf4j/slf4j-api
-	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
-	
- 
- 	providedCompile "javax.servlet:javax.servlet-api:3.1.0" 
+
 
     // Use JUnit test framework
     //testImplementation 'junit:junit:4.12'
@@ -95,9 +81,8 @@ dependencies {
     testCompile("org.junit.platform:junit-platform-runner:1.0.0-M4")
     
     
-	testCompile group: 'org.jboss.arquillian', name: 'arquillian-junit', version: '1.0.0.Alpha4'
-	// https://mvnrepository.com/artifact/org.jboss.weld.arquillian.container/arquillian-weld-ee-embedded-1.1
-	testCompile group: 'org.jboss.weld.arquillian.container', name: 'arquillian-weld-ee-embedded-1.1', version: '1.1.2.Final'
+//	testCompile group: 'org.jboss.arquillian', name: 'arquillian-junit', version: '1.0.0.Alpha4'
+//	testCompile group: 'org.jboss.weld.arquillian.container', name: 'arquillian-weld-ee-embedded-1.1', version: '1.1.2.Final'
 	
 	
 //	testRuntime group: 'org.jboss.arquillian.container', name: 'arquillian-weld-ee-embedded-1.1', version: '1.0.0.Alpha6'
@@ -111,8 +96,20 @@ junitPlatform {
     details 'tree'
 }
 
-task stage(dependsOn: ['build', 'clean'])
-build.mustRunAfter clean
+//task stage() {
+//    dependsOn clean, war
+//}
+//war.mustRunAfter clean
+
+//task copyToLib(type: Copy) {
+//    into "$buildDir/server"
+//    from(configurations.compile) {
+//        include "webapp-runner*"
+//    }
+//}
+
+//stage.dependsOn(copyToLib)
+
 
 task copyDependencies(type: Copy) {
    from configurations.compile   

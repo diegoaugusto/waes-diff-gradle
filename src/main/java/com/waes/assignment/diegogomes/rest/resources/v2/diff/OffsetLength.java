@@ -1,4 +1,4 @@
-package com.waes.assignment.diegogomes.rest.resources.v1.diff;
+package com.waes.assignment.diegogomes.rest.resources.v2.diff;
 
 /**
  * Class that represents the offset and the length in the data that is different from another one.

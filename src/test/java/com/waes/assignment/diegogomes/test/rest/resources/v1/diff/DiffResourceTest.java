@@ -1,23 +1,5 @@
 package com.waes.assignment.diegogomes.test.rest.resources.v1.diff;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response.Status;
-
-import org.jboss.arquillian.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.resteasy.client.ClientResponse;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import com.waes.assignment.diegogomes.rest.resources.v1.diff.Diff;
-
 //@RunWith(Arquillian.class)
 public class DiffResourceTest {
 

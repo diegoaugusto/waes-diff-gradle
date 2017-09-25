@@ -121,6 +121,15 @@ Here you can see details about each service.
 
 - **500** Internal server error has happened
 
+
+##### **NEW Version!!!** POST _\<host\>_/waes-diff-gradle/v1/diff/*\<ID\>*
+
+- **Payload** body example
+```javascript
+{"left":"YWJjZGVmZ2hpamtsbW5v", "right":"YWJjZGVmZ2hpamtsbW5v"}
+```
+
+
 ### Suggestion of use
 - Call POST _\<host\>_/waes-diff-gradle/v1/diff/1/left passing {"data":"YWJjZGVmZ2hpag=="} as the body of the request.
 - Call POST _\<host\>_/waes-diff-gradle/v1/diff/1/right passing {"data":"MDEyZGVmZ2hpag=="} as the body of the request.
@@ -130,12 +139,13 @@ Here you can see details about each service.
 ## The code and its dependencies
 - REST services are implemented in Java following the JAX-RS API specification.
 - Unit tests are executed during the build process and are implemented with [JUnit](http://junit.org/).
-- 
+- Unfortunately, integration tests with Arquillian are not properly configured and it will be worked in a future iteration.
 
 
-## Possible improvements for future iterations.
-- Possibility to add new versions of the service API without impacting the existing version of the services.
-- Accept binary data directly from an upload form. User could upload two files and compare them. Another possibility is to submit one audio file and compare left/right streams and identify if it is a mono (streams will be equal) or stereo audio file.
-- One unique POST service to submit both left and right binary data.
-- Provide User Interface to better test the services and manage the IDs.
+## Possible improvements for future iterations
+- Set up the Continuous Integration process (use Jenkins for that)
 - Document API using the [OpenAPI (Swagger)](https://swagger.io/specification/) specification
+- Provide User Interface to better test the services and manage the IDs.
+- Possibility add new versions of the service API without impacting the existing version of the services.
+- One unique POST service to submit both left and right binary data.
+- Accept binary data directly from an upload form. User could upload two files and compare them. Another possibility is to submit one audio file and compare left/right streams and identify if it is a mono (streams will be equal) or stereo audio file.

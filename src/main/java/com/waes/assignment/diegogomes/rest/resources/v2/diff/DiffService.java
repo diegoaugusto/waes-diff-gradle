@@ -1,4 +1,4 @@
-package com.waes.assignment.diegogomes.rest.resources.v1.diff;
+package com.waes.assignment.diegogomes.rest.resources.v2.diff;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +14,6 @@ import com.waes.assignment.diegogomes.common.exceptions.InputStreamException;
 import com.waes.assignment.diegogomes.common.persistence.DBService;
 import com.waes.assignment.diegogomes.common.persistence.DBServiceFactoryCreator;
 import com.waes.assignment.diegogomes.common.persistence.model.DiffObject;
-import com.waes.assignment.diegogomes.common.persistence.model.DiffObjectFieldsEnum;
 import com.waes.assignment.diegogomes.common.persistence.mongodb.MongoDBServiceCreator;
 import com.waes.assignment.diegogomes.rest.exceptions.BadRequestException;
 import com.waes.assignment.diegogomes.rest.exceptions.Base64Exception;
@@ -22,13 +21,6 @@ import com.waes.assignment.diegogomes.rest.exceptions.InternalServerException;
 import com.waes.assignment.diegogomes.rest.exceptions.NotFoundException;
 import com.waes.assignment.diegogomes.rest.resources.AbstractService;
 
-/**
- * This is the service class where all the business logic related to the diff operation
- * will be implemented.
- * 
- * @author Diego Gomes
- *
- */
 public class DiffService extends AbstractService {
 
 	private static DiffService instance;
@@ -53,7 +45,7 @@ public class DiffService extends AbstractService {
 		}
 		return instance;
 	}
-
+	
 	/**
 	 * Get {@link DiffObject} by its id. If it doesn't exist, returns null.
 	 * @param id Id of the {@link DiffObject} object
@@ -71,11 +63,13 @@ public class DiffService extends AbstractService {
 	 * @throws Base64Exception Thrown when the base64Data is not a valid {@link Base64} encoded data
 	 * @throws InternalServerException Thrown when there is an internal error to process the {@link DiffObject} or to insert it in the database 
 	 */
-	public DiffObject insert(Integer id, String side, DataWrapper dataWrapper) throws Base64Exception, InternalServerException {
-		byte[] decodedData = null;
+	public DiffObject insert(Integer id, DataWrapper dataWrapper) throws Base64Exception, InternalServerException {
+		byte[] decodedDataLeft = null;
+		byte[] decodedDataRight = null;
 		
 		try {
-			decodedData = Base64.getDecoder().decode(dataWrapper.getData());
+			decodedDataLeft = Base64.getDecoder().decode(dataWrapper.getLeft());
+			decodedDataRight = Base64.getDecoder().decode(dataWrapper.getRight());
 		} catch (Exception e) {
 			throw new Base64Exception(e);
 		}
@@ -87,13 +81,8 @@ public class DiffService extends AbstractService {
 				diffObject.setId(id);
 			}
 			
-			DiffObjectFieldsEnum diffSide = DiffObjectFieldsEnum.getByDescription(side);
-			
-			if (diffSide.equals(DiffObjectFieldsEnum.LEFT)) {
-				diffObject.setLeft(decodedData);
-			} else if (diffSide.equals(DiffObjectFieldsEnum.RIGHT)) {
-				diffObject.setRight(decodedData);
-			}
+			diffObject.setLeft(decodedDataLeft);
+			diffObject.setRight(decodedDataRight);
 			
 			diffObject = this.getDb().insertOrUpdate(diffObject);
 			
@@ -190,13 +179,13 @@ public class DiffService extends AbstractService {
 				throw new BadRequestException("Error while processing request body.", ise);
 			} catch (Exception e) {
 				log.error("Error to transform body data in the internal data type..", e);
-				throw new InternalServerException("Error to transform body data in the internal data type. Make sure body looks like {\"data\":\"VGhpcyBpcyBhbiBleGFtcGxlIG9mIHRoZSBkYXRhIGlucHV0Lg==\"} .", e);
+				throw new InternalServerException("Error to transform body data in the internal data type. Make sure body looks like {\"left\":\"VGhpcyBpcyBhbiBleGFtcGxlIG9mIHRoZSBkYXRhIGlucHV0Lg==\", \"right\":\"VGhpcyBpcyBhbiBleGFtcGxlIG9mIHRoZSBkYXRhIGlucHV0Lg==\"} .", e);
 			}
 		}
 		
-		if (dataWrapper == null || dataWrapper.getData() == null) {
+		if (dataWrapper == null || dataWrapper.getLeft() == null || dataWrapper.getRight() == null) {
 			log.error("Base64 encoded binary data is empty.");
-			throw new BadRequestException("Base64 encoded binary data is empty. Make sure body looks like {\\\"data\\\":\\\"VGhpcyBpcyBhbiBleGFtcGxlIG9mIHRoZSBkYXRhIGlucHV0Lg==\\\"}.");
+			throw new BadRequestException("Base64 encoded binary data is empty. Make sure body looks like {\"left\":\"VGhpcyBpcyBhbiBleGFtcGxlIG9mIHRoZSBkYXRhIGlucHV0Lg==\", \"right\":\"VGhpcyBpcyBhbiBleGFtcGxlIG9mIHRoZSBkYXRhIGlucHV0Lg==\"}.");
 		}
 		return dataWrapper;
 	}

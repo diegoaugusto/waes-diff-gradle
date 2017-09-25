@@ -7,6 +7,11 @@ import org.junit.Test;
 import com.waes.assignment.diegogomes.common.persistence.mongodb.MongoDBServiceCreator;
 import com.waes.assignment.diegogomes.common.persistence.mongodb.MongoDBServiceFactory;
 
+/**
+ * Class to test the creation of the {@link MongoDBServiceCreator} class
+ * @author Diego Gomes
+ *
+ */
 public class MongoDBServiceCreatorTest {
 
 	@Test 

@@ -1,7 +1,6 @@
 package com.waes.assignment.diegogomes.rest.resources.v1.diff;
 
 import java.io.InputStream;
-import java.util.Base64;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -17,13 +16,18 @@ import javax.ws.rs.core.Response;
 
 import com.waes.assignment.diegogomes.common.persistence.model.DiffObject;
 import com.waes.assignment.diegogomes.common.persistence.model.DiffObjectFieldsEnum;
+import com.waes.assignment.diegogomes.rest.exceptions.BadRequestException;
 import com.waes.assignment.diegogomes.rest.exceptions.JsonException;
 import com.waes.assignment.diegogomes.rest.exceptions.RestException;
 import com.waes.assignment.diegogomes.rest.resources.AbstractResource;
 import com.waes.assignment.diegogomes.rest.responses.DiffObjectResponse;
 import com.waes.assignment.diegogomes.rest.responses.DiffResponse;
 
-@Path("/v1")
+/**
+ * Version 1 of of the Diff services 
+ * @author Diego Gomes
+ *
+ */
 public class DiffResource extends AbstractResource {
 
 	private DiffService diffService = null;
@@ -116,7 +120,6 @@ public class DiffResource extends AbstractResource {
 	 * @param id The id of the Diff object created to compare both binary data. Only {@link Integer} value is expected. 
 	 * 		  There is a validation to return a respective error message when it's not a valid id.
 	 * @param side The side of the Diff comparison. Possible values are "right" and "left".
-	 * @param base64Data Binary data encoded in Base64
 	 * @return Json data containing the status code and the message about the insertion of binary data
 	 */
 	@POST
@@ -132,7 +135,7 @@ public class DiffResource extends AbstractResource {
 			// validate input of <side> parameter
 			log.info("Validating parameter <side> ["+ side +"]");
 			if (side == null || DiffObjectFieldsEnum.getByDescription(side) == null) {
-				//throw new BadRequestException("SIDE path parameter is mandatory. Possible values are: [left,right]");
+				throw new RestException(new BadRequestException("SIDE path parameter is mandatory. Possible values are: [left,right]"));
 			}
 			
 			// validate input of <body>
@@ -158,16 +161,5 @@ public class DiffResource extends AbstractResource {
 	// GETTERS and SETTERS
 	private DiffService getDiffService() {
 		return this.diffService;
-	}
-	
-	
-	// TODO REMOVER
-	public static void main(String[] args) {
-		System.out.println(Base64.getEncoder().encodeToString("abcdefghij".getBytes()));
-		// YWJjZGVmZ2hpag==
-		
-		System.out.println(Base64.getEncoder().encodeToString("012defghij".getBytes()));
-		// MDEyZGVmZ2hpag==
-		
 	}
 }

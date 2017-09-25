@@ -85,7 +85,4 @@ public class MongoDBService implements DBService {
 		this.getDiffObjectsCollection().insertOne(mongoDBDocument);
 		return diffObject;
 	}
-	
-	
-	
 }
