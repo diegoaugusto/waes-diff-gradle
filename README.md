@@ -122,7 +122,7 @@ Here you can see details about each service.
 - **500** Internal server error has happened
 
 
-##### **NEW Version!!!** POST _\<host\>_/waes-diff-gradle/v1/diff/*\<ID\>*
+#### **NEW Version!!!** POST _\<host\>_/waes-diff-gradle/v2/diff/*\<ID\>*
 
 - **Payload** body example
 ```javascript
