@@ -1,5 +1,5 @@
-# WAES Assignment - Diff
-This repository is the home of the assignment to develop a diff service.
+# WAESDiff
+This repository is the home of the development of a diff service to practice the use of Gradle, JAX-RS and other technologies.
 
 ## Quick Start
 In order to run this project locally, it is necessary to download some tools (if you don't have them already) and proceed with the steps below.
